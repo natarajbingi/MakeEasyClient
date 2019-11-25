@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#8ba0af</color>
+    <color name="colorPrimaryDark">#025d8e</color>
+    <color name="colorAccent">#6b9e15</color>
+
+    <color name="background">#546E7A</color>
+    <color name="background_one">#FFFFFF</color>
+    <color name="background_one_">#e6e7e8</color>
+    <color name="darkBlue">#041c31</color>
+    <color name="wrongMsg">#F23532</color>
+    <color name="black">#000000</color>
+    <color name="midnightBlue">#062a4e</color>
+    <color name="midnightBluebg">#052b4f</color>
+    <color name="darkGray">#9ba7b3</color>
+    <color name="line">#bbbdbf</color>
+    <color name="slateGray">#51667b</color>
+    <color name="white">#FFFFFF</color>
+    <color name="hintcolor">#8ba0af</color>
+    <color name="teal">#025d8e</color>
+    <color name="oliveDrab">#6b9e15</color>
+    <color name="deepSkyBluepopup">#441787bf</color>
+    <color name="deepSkyBlue">#01acf1</color>
+    <color name="deepSkyBlue1">#077ba9</color>
+    <color name="fadeWhite">#f8f8f8</color>
+    <color name="otp_backg">#1A3956</color>
+    <color name="brown">#543717</color>
+
+    <color name="pageBackground">#eef7fe</color>
+
+    <!-- Selectors -->
+    <color name="selector_normal">@android:color/transparent</color>
+    <color name="selector_blue_focused">#2229b1ff</color>
+    <color name="selector_blue_pressed">#4429b8ff</color>
+    <color name="dull_black_9999">#999999</color>
+    <color name="dull_black_3333">#333333</color>
+    <color name="dull_black_6666">#666666</color>
+    <color name="dull_black_divider">#eaeaea</color>
+    <color name="background_blue">#edf0f3</color>
+    <color name="editbox">#ebebeb</color>
+    <color name="notificationbg">#f5f6f6</color>
+    <color name="green_approved">#43be52</color>
+    <color name="orange_waiting_approval">#e0861e</color>
+    <color name="yello">#C8D400</color>
+    <color name="yellowww">#FDD835</color>
+    <color name="red_rejected">#ec1d24</color>
+</resources>
