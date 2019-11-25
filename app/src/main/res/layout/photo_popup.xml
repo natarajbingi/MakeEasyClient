@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--android:layout_marginTop="?attr/actionBarSize"-->
+    <RelativeLayout
+        android:id="@+id/photoId"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/headingTextHolder"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/closeImgPopUp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.15"
+                android:padding="5dp"
+                android:src="@drawable/ic_close_small" />
+
+            <TextView
+                android:id="@+id/headingText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.85"
+                android:text="Hello"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <com.makein.app.controler.CustomImageView
+            android:id="@+id/imgPopup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/headingTextHolder"
+            android:background="@color/black"
+            android:padding="5dp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
