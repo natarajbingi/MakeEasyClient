@@ -15,8 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.makein.client.R;
+import com.makein.client.ServerHit.Api;
+import com.makein.client.ServerHit.RetroCall;
 import com.makein.client.controller.Controller;
 import com.makein.client.controller.Sessions;
+import com.makein.client.models.LoginRes;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -27,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     AppCompatCheckBox remember;
     String userIdStr, passwordStr;
     private ProgressDialog dialog;
+    boolean keepMeSignedStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +44,14 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         context = this;
         dialog = new ProgressDialog(LoginActivity.this);
-        dialog.setMessage("Doing something, please wait.");
+        dialog.setMessage("in Progress,  please wait.");
 
+        String LogInDirect = Sessions.getUserObject(context, Controller.keepMeSignedStr);
+        if (LogInDirect != null) {
+            if (LogInDirect.equals("TRUE")) {
+                LoginSuccess();
+            }
+        }
         userId = findViewById(R.id.input_user);
         password = findViewById(R.id.input_password);
         login = findViewById(R.id.btn_login);
@@ -91,31 +107,90 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
-    public void login() {
-        Log.d("TAG", "Login");
 
+//            Login(userIdStr, passwordStr);
+//            if (remember.isChecked()) {
+//                Toast.makeText(context, "UserID: " + Sessions.getUserObject(context, Controller.userId)
+//                        + " Password: " + Sessions.getUserObject(context, Controller.password), Toast.LENGTH_LONG).show();
+//            }
+//            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//            startActivity(intent);
+
+
+
+    public void login() {
         if (!Validation()) {
             Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
             login.setEnabled(true);
             return;
         } else {
-           // Login(userIdStr, passwordStr);
-            if (remember.isChecked()) {
-                Toast.makeText(context, "UserID: " + Sessions.getUserObject(context, Controller.userId)
-                        + " Password: " + Sessions.getUserObject(context, Controller.password), Toast.LENGTH_LONG).show();
-            }
-            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-            startActivity(intent);
+            keepMeSignedStr = remember.isChecked();
+            Login(userIdStr, passwordStr);
 
         }
 
         login.setEnabled(false);
     }
 
-    @Override
-    public void onBackPressed() {
-        // disable going back to the MainActivity
-        moveTaskToBack(true);
+    private void Login(String username, String pwd) {
+        dialog.show();
+
+        //creating request body for file
+        RequestBody usernameBody = RequestBody.create(MediaType.parse("text/plain"), username);
+        RequestBody pwdBody = RequestBody.create(MediaType.parse("text/plain"), pwd);
+
+        //creating our api
+        Api api = RetroCall.getClient();
+        //creating a call and calling the upload image method
+        Call<LoginRes> call = api.login(usernameBody, pwdBody);
+
+        //finally performing the call
+        call.enqueue(new Callback<LoginRes>() {
+            @Override
+            public void onResponse(Call<LoginRes> call, Response<LoginRes> response) {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                login.setEnabled(true);
+                Controller.logPrint(call.request().toString(), null, response.body());
+                assert response.body() != null;
+                if (!response.body().error) {
+                    if (response.body().data.get(0).createdby.equals("ADMIN")) {
+                        Sessions.setUserObject(context, response.body().data.get(0).id + "", Controller.userID);
+                        Sessions.setUserObject(context, response.body().data.get(0).email_id + "", Controller.emailID);
+                        Sessions.setUserObject(context, response.body().data.get(0).profile_img + "", Controller.profile_img);
+                        Sessions.setUserObject(context, response.body().data.get(0).first_name + " " + response.body().data.get(0).last_name + "", Controller.name);
+                        Sessions.setUserObject(context, response.body().data.get(0).address_one + ", " + response.body().data.get(0).address_two + ", " + response.body().data.get(0).Landmark + "" + response.body().data.get(0).pincode, Controller.Address);
+                        Sessions.setUserObj(context, response.body(), Controller.LoginRes);
+
+                        LoginSuccess();
+                        if (keepMeSignedStr) {
+                            Sessions.setUserObject(context, "TRUE", Controller.keepMeSignedStr);
+                        } else {
+                            Sessions.setUserObject(context, "FALSE", Controller.keepMeSignedStr);
+                        }
+                    } else {
+                        Controller.Toasty(context, "Admin Credentials are wrong, Please try again.");
+                    }
+                } else {
+                    Controller.Toasty(context, "Something went wrong server side...");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginRes> call, Throwable t) {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                Controller.Toasty(context, "Something went wrong , Please check network connection.");
+                Log.d("Error", t.getMessage());
+                login.setEnabled(true);
+            }
+        });
+    }
+    void LoginSuccess() {
+        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
