@@ -18,7 +18,8 @@ public interface Api {
     //make sure you are not using localhost
     //find the ip usinc ipconfig command
 //    String BASE_URL = "http://192.168.0.107:80/makein/";
-    String BASE_URL = "http://192.168.0.107:80/makein/";
+//    String BASE_URL = "http://192.168.0.107:80/makein/";
+    String BASE_URL = "http://snsproduction.com/makeasy/";
 
 
     //this is our multipart request
@@ -28,15 +29,15 @@ public interface Api {
     @POST("apis.php?apicall=upload")
     Call<MyResponse> uploadImage(@Part("image\"; filename=\"myfile.jpg\" ") RequestBody file, @Part("desc") RequestBody desc);
 
-    @Multipart
+    /*@Multipart
     @POST("apis.php?apicall=addcategory")
     Call<MyResponse> addcategory(@Part("image\"; filename=\"myfile.jpg\" ") RequestBody file,
                                  @Part("name") RequestBody name,
                                  @Part("description") RequestBody description,
                                  @Part("created_by") RequestBody created_by
-    );
+    );*/
 
-    @Multipart
+    /*@Multipart
     @POST("apis.php?apicall=addsubcategory")
     Call<MyResponse> addsubcategory(@Part("image\"; filename=\"myfile.jpg\" ") RequestBody file,
                                     @Part("name") RequestBody name,
@@ -45,7 +46,7 @@ public interface Api {
                                     @Part("pur_cost") RequestBody pur_cost,
                                     @Part("sell_cost") RequestBody sell_cost,
                                     @Part("created_by") RequestBody created_by
-    );
+    );*/
 
     @Multipart
     @POST("apis.php?apicall=userregister")
@@ -100,7 +101,13 @@ public interface Api {
 
     @Multipart
     @POST("apis.php?apicall=login")
-    Call<LoginRes> login(@Part("username") RequestBody username, @Part("pwd") RequestBody pwd);
+    Call<LoginRes> login(@Part("username") RequestBody username,
+                         @Part("pwd") RequestBody pwd,
+                         @Part("registrationID") RequestBody registrationID,
+                         @Part("imeiNumber") RequestBody imeiNumber,
+                         @Part("deviceName") RequestBody deviceName,
+                         @Part("appVersion") RequestBody appVersion
+    );
 
 //    public String registrationID;
 //    public String deviceName;

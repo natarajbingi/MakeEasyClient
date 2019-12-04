@@ -4,5 +4,7 @@
     <string name="logout_confirm">Are you sure you want to Logout?</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
     <string name="permision_text">You need to allow access to both the permissions</string>
 </resources>
