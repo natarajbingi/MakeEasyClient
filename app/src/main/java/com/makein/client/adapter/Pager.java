@@ -34,6 +34,9 @@ public class Pager extends FragmentStatePagerAdapter {
             case 2:
                 SetttingFragment tab3 = new SetttingFragment();
                 return tab3;
+            case 3:
+                SetttingFragment tab4 = new SetttingFragment();
+                return tab4;
             default:
                 return null;
         }

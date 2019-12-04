@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
 
+@SuppressWarnings("unchecked")
 public class Sessions {
 
     private SharedPreferences pref;

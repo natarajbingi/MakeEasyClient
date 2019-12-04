@@ -19,7 +19,7 @@ import com.makein.client.adapter.ViewPagerAdapter;
 
 import java.util.ArrayList;
 
-public class CategoryDetailsFragment  extends Fragment {
+public class CategoryDetailsFragment extends Fragment {
     // Toolbar toolbar ;
     Context context;
 
@@ -30,7 +30,7 @@ public class CategoryDetailsFragment  extends Fragment {
     private FragmentStatePagerAdapter adapter;
     private LinearLayout thumbnailsContainer;
     private final static int[] resourceIDs = new int[]{R.drawable.apple, R.drawable.apple,
-            R.drawable.apple, R.drawable.apple, R.drawable.apple, R.drawable.apple,R.drawable.apple};
+            R.drawable.apple, R.drawable.apple, R.drawable.apple, R.drawable.apple, R.drawable.apple};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class CategoryDetailsFragment  extends Fragment {
         viewPager.setAdapter(adapter);
 
         inflateThumbnails();
-        return v ;
+        return v;
     }
 
     private View.OnClickListener onClickListener(final int i) {
@@ -91,7 +91,7 @@ public class CategoryDetailsFragment  extends Fragment {
             options = new BitmapFactory.Options();
             options.inSampleSize = 3;
             options.inDither = false;
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), images.get(i), options );
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), images.get(i), options);
             imageView.setImageBitmap(bitmap);
             //set to image view
             imageView.setImageBitmap(bitmap);

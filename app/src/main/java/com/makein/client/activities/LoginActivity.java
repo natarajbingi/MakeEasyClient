@@ -21,6 +21,8 @@ import com.makein.client.controller.Controller;
 import com.makein.client.controller.Sessions;
 import com.makein.client.models.LoginRes;
 
+import java.util.UUID;
+
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -37,6 +39,10 @@ public class LoginActivity extends AppCompatActivity {
     String userIdStr, passwordStr;
     private ProgressDialog dialog;
     boolean keepMeSignedStr;
+    String deviceName =  android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL;
+    String imeiNumber = UUID.randomUUID().toString();
+    String appVersion = Controller.appVersion;
+    String registrationID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,10 +145,16 @@ public class LoginActivity extends AppCompatActivity {
         RequestBody usernameBody = RequestBody.create(MediaType.parse("text/plain"), username);
         RequestBody pwdBody = RequestBody.create(MediaType.parse("text/plain"), pwd);
 
+        RequestBody registrationIDBody = RequestBody.create(MediaType.parse("text/plain"), registrationID);
+        RequestBody imeiNumberBody = RequestBody.create(MediaType.parse("text/plain"), imeiNumber);
+        RequestBody deviceNameBody = RequestBody.create(MediaType.parse("text/plain"), deviceName);
+        RequestBody appVersionBody = RequestBody.create(MediaType.parse("text/plain"), appVersion);
+
         //creating our api
         Api api = RetroCall.getClient();
         //creating a call and calling the upload image method
-        Call<LoginRes> call = api.login(usernameBody, pwdBody);
+        Call<LoginRes> call = api.login(usernameBody, pwdBody,registrationIDBody,imeiNumberBody,deviceNameBody,appVersionBody);
+
 
         //finally performing the call
         call.enqueue(new Callback<LoginRes>() {
@@ -155,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
                 Controller.logPrint(call.request().toString(), null, response.body());
                 assert response.body() != null;
                 if (!response.body().error) {
-                    if (response.body().data.get(0).createdby.equals("ADMIN")) {
+                    if (!response.body().data.get(0).createdby.equals("ADMIN")) {
                         Sessions.setUserObject(context, response.body().data.get(0).id + "", Controller.userID);
                         Sessions.setUserObject(context, response.body().data.get(0).email_id + "", Controller.emailID);
                         Sessions.setUserObject(context, response.body().data.get(0).profile_img + "", Controller.profile_img);
@@ -170,7 +182,7 @@ public class LoginActivity extends AppCompatActivity {
                             Sessions.setUserObject(context, "FALSE", Controller.keepMeSignedStr);
                         }
                     } else {
-                        Controller.Toasty(context, "Admin Credentials are wrong, Please try again.");
+                        Controller.Toasty(context, "Credentials are wrong, Please try again.");
                     }
                 } else {
                     Controller.Toasty(context, "Something went wrong server side...");

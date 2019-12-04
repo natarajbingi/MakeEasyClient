@@ -17,16 +17,18 @@ import com.makein.client.R;
 import com.makein.client.fragment.CategoryDetailsFragment;
 import com.makein.client.fragment.subCategoryFragment;
 import com.makein.client.models.HomeItems;
+import com.makein.client.models.MyResponse;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdapter.ViewHolder> {
-    private ArrayList<HomeItems> subItems;
+    private List<MyResponse.SubProds> subItems;
     private Context context;
     private SubCategoriesAdapter.RecyclerViewClickListener mRecyclerListener;
 
 
-    public SubCategoriesAdapter(Context context, ArrayList<HomeItems> subItems , SubCategoriesAdapter.RecyclerViewClickListener mRecyclerListener ) {
+    public SubCategoriesAdapter(Context context, List<MyResponse.SubProds> subItems, SubCategoriesAdapter.RecyclerViewClickListener mRecyclerListener) {
         this.subItems = subItems;
         this.context = context;
         this.mRecyclerListener = mRecyclerListener;
@@ -35,29 +37,38 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
     @Override
     public SubCategoriesAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.sub_cat_items, viewGroup, false);
-        return new SubCategoriesAdapter.ViewHolder(view,mRecyclerListener);
+        return new SubCategoriesAdapter.ViewHolder(view, mRecyclerListener);
     }
 
     @Override
     public void onBindViewHolder(SubCategoriesAdapter.ViewHolder viewHolder, int i) {
 
-        viewHolder.category.setText(subItems.get(i).getItemName());
-        viewHolder.img.setImageResource(Integer.parseInt(subItems.get(i).getImages()));
+        viewHolder.category.setText(subItems.get(i).name);
+        viewHolder.category_rs.setText(subItems.get(i).description);
+//        viewHolder.img.setImageResource(Integer.parseInt(subItems.get(i).img_urls.get(0)));
     }
 
     @Override
     public int getItemCount() {
-        return subItems.size();
+        try {
+            return subItems.size();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private SubCategoriesAdapter.RecyclerViewClickListener mListener;
         private TextView category;
+        private TextView category_rs;
         private ImageView img;
+
         public ViewHolder(View view, RecyclerViewClickListener mListener) {
             super(view);
 
-            category = (TextView)view.findViewById(R.id.category_name);
+            category = (TextView) view.findViewById(R.id.category_name);
+            category_rs = (TextView) view.findViewById(R.id.category_rs);
             img = (ImageView) view.findViewById(R.id.image_sub);
 
 
@@ -69,21 +80,16 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
 
         @Override
         public void onClick(View view) {
-
             int pos = getAdapterPosition();
-
-
-            HomeItems clickedDataItem = subItems.get(pos);
-
-            mListener.onClickRecycler(clickedDataItem.getItemName(),getAdapterPosition());
-
-            Toast.makeText(view.getContext(), "You clicked " + clickedDataItem.getItemName(), Toast.LENGTH_SHORT).show();
+            MyResponse.SubProds clickedDataItem = subItems.get(pos);
+            mListener.onClickRecycler(clickedDataItem.name, getAdapterPosition());
+            Toast.makeText(view.getContext(), "You clicked " + clickedDataItem.name, Toast.LENGTH_SHORT).show();
 
         }
     }
-    public interface RecyclerViewClickListener {
 
-        void onClickRecycler(String name,int position);
+    public interface RecyclerViewClickListener {
+        void onClickRecycler(String name, int position);
     }
 
 
