@@ -80,6 +80,7 @@ public class HomeActivity extends AppCompatActivity implements TabLayout.OnTabSe
                 } else {
                     getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                     toolbar.setNavigationIcon(R.drawable.ic_home_black_24dp);
+                    toolbar.setTitle("HOME");
                     // toggle.syncState();
                 }
             }

@@ -16,14 +16,17 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.makein.client.R;
 import com.makein.client.adapter.ViewPagerAdapter;
+import com.makein.client.models.MyResponse;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryDetailsFragment extends Fragment {
     // Toolbar toolbar ;
-    Context context;
+    private Context context;
 
     private ArrayList<Integer> images;
+    private List<String> img_urls;
     private BitmapFactory.Options options;
     private ViewPager viewPager;
     private View btnNext, btnPrev;
@@ -31,14 +34,24 @@ public class CategoryDetailsFragment extends Fragment {
     private LinearLayout thumbnailsContainer;
     private final static int[] resourceIDs = new int[]{R.drawable.apple, R.drawable.apple,
             R.drawable.apple, R.drawable.apple, R.drawable.apple, R.drawable.apple, R.drawable.apple};
+    private MyResponse.SubProds item;
+    private String CategoryName, SubCategoryName;
+
+    CategoryDetailsFragment(MyResponse.SubProds item, String CategoryName, String SubCategoryName) {
+        this.item = item;
+        this.CategoryName = CategoryName;
+        this.SubCategoryName = SubCategoryName;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.category_deials_fragment, container, false);
-
         context = getContext();
 
+        getActivity().setTitle(SubCategoryName);
+
         images = new ArrayList<>();
+        img_urls = item.img_urls;
         //find view by id
         viewPager = (ViewPager) v.findViewById(R.id.view_pager);
         thumbnailsContainer = (LinearLayout) v.findViewById(R.id.container);
@@ -78,8 +91,8 @@ public class CategoryDetailsFragment extends Fragment {
     }
 
     private void setImagesData() {
-        for (int i = 0; i < resourceIDs.length; i++) {
-            images.add(resourceIDs[i]);
+        for (int resourceID : resourceIDs) {
+            images.add(resourceID);
         }
     }
 
