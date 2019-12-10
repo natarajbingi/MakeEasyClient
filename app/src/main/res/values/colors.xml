@@ -42,6 +42,7 @@
     <color name="notificationbg">#f5f6f6</color>
     <color name="green_approved">#43be52</color>
     <color name="orange_waiting_approval">#e0861e</color>
+    <color name="orange">#FF5722</color>
     <color name="yello">#C8D400</color>
     <color name="yellowww">#FDD835</color>
     <color name="red_rejected">#ec1d24</color>

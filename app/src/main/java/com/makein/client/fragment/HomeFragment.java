@@ -93,7 +93,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.RecyclerViewCl
     @Override
     public void onClickRecycler(MyResponse.Data data, int position) {
         if(data.subProds!=null) {
-            Fragment fragment = new subCategoryFragment(data.subProds);
+            Fragment fragment = new subCategoryFragment(data.subProds,data.name);
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_home, fragment);

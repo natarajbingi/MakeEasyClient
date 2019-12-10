@@ -1,27 +1,21 @@
 package com.makein.client.fragment;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.makein.client.R;
-import com.makein.client.adapter.HomeAdapter;
 import com.makein.client.adapter.SubCategoriesAdapter;
-import com.makein.client.models.HomeItems;
 import com.makein.client.models.MyResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class subCategoryFragment extends Fragment implements SubCategoriesAdapter.RecyclerViewClickListener {
@@ -29,9 +23,11 @@ public class subCategoryFragment extends Fragment implements SubCategoriesAdapte
     Context context;
     List<MyResponse.SubProds> items;
     RecyclerView recyclerView;
+    String CategoryName;
 
-    subCategoryFragment(List<MyResponse.SubProds> items) {
+    subCategoryFragment(List<MyResponse.SubProds> items, String CategoryName) {
         this.items = items;
+        this.CategoryName = CategoryName;
     }
 
     @Override
@@ -39,6 +35,7 @@ public class subCategoryFragment extends Fragment implements SubCategoriesAdapte
         View v = inflater.inflate(R.layout.sub_category_fragment, container, false);
 
         context = getContext();
+        getActivity().setTitle(CategoryName);
         initViews(v);
         return v;
     }
@@ -64,8 +61,8 @@ public class subCategoryFragment extends Fragment implements SubCategoriesAdapte
     }
 
     @Override
-    public void onClickRecycler(String name, int position) {
-        Fragment fragment = new CategoryDetailsFragment();
+    public void onClickRecycler(MyResponse.SubProds clickedItem, String name, int position) {
+        Fragment fragment = new CategoryDetailsFragment(clickedItem, CategoryName, name);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container_home, fragment);

@@ -8,18 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.makein.client.R;
-import com.makein.client.fragment.CategoryDetailsFragment;
-import com.makein.client.fragment.subCategoryFragment;
-import com.makein.client.models.HomeItems;
 import com.makein.client.models.MyResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdapter.ViewHolder> {
@@ -82,14 +75,14 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
         public void onClick(View view) {
             int pos = getAdapterPosition();
             MyResponse.SubProds clickedDataItem = subItems.get(pos);
-            mListener.onClickRecycler(clickedDataItem.name, getAdapterPosition());
+            mListener.onClickRecycler(clickedDataItem,clickedDataItem.name, getAdapterPosition());
             Toast.makeText(view.getContext(), "You clicked " + clickedDataItem.name, Toast.LENGTH_SHORT).show();
 
         }
     }
 
     public interface RecyclerViewClickListener {
-        void onClickRecycler(String name, int position);
+        void onClickRecycler(MyResponse.SubProds Item, String name, int position);
     }
 
 
