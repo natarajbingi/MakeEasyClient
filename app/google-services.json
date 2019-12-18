@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "613114671082",
+    "firebase_url": "https://makesnsproduction.firebaseio.com",
+    "project_id": "makesnsproduction",
+    "storage_bucket": "makesnsproduction.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613114671082:android:348286dee271d649c1cc93",
+        "android_client_info": {
+          "package_name": "com.makein.client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613114671082-g6q893k32tfnqq6h02g38v7371n46poq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLNl_mDQaKQ3nPmAHezmWCOn92VRJVVsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613114671082-g6q893k32tfnqq6h02g38v7371n46poq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -43,6 +43,7 @@ public class Controller extends Application {
     public static final String userID = "userID";
     public static final String emailID = "emailID";
     public static final String name = "name";
+    public static final String token = "token";
     public static final String Address = "Address";
     public static final String profile_img = "profile_img";
     public static final String LoginRes = "LoginRes";
