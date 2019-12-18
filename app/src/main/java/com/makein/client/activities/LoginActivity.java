@@ -167,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
                 Controller.logPrint(call.request().toString(), null, response.body());
                 assert response.body() != null;
                 if (!response.body().error) {
-                    if (!response.body().data.get(0).createdby.equals("ADMIN")) {
+//                    if (!response.body().data.get(0).createdby.equals("ADMIN")) {
                         Sessions.setUserObject(context, response.body().data.get(0).id + "", Controller.userID);
                         Sessions.setUserObject(context, response.body().data.get(0).email_id + "", Controller.emailID);
                         Sessions.setUserObject(context, response.body().data.get(0).profile_img + "", Controller.profile_img);
@@ -181,9 +181,9 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             Sessions.setUserObject(context, "FALSE", Controller.keepMeSignedStr);
                         }
-                    } else {
-                        Controller.Toasty(context, "Credentials are wrong, Please try again.");
-                    }
+//                    } else {
+//                        Controller.Toasty(context, "Credentials are wrong, Please try again.");
+//                    }
                 } else {
                     Controller.Toasty(context, "Something went wrong server side...");
                 }

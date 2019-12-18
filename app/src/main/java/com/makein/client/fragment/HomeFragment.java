@@ -130,6 +130,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.RecyclerViewCl
         call.enqueue(new Callback<MyResponse>() {
             @Override
             public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                Controller.logPrint(call.request().toString(),null,response.body());
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }

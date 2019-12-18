@@ -13,11 +13,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="385dp"
+                android:layout_height="345dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -47,20 +48,38 @@
                     android:src="@drawable/next" />
             </LinearLayout>
 
-            <HorizontalScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:background="#D8D8D8"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp">
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:id="@+id/container"
-                    android:layout_width="wrap_content"
+                <HorizontalScrollView
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal" />
-            </HorizontalScrollView>
+                    android:layout_weight="0.95"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <LinearLayout
+                        android:id="@+id/container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal" />
+
+                </HorizontalScrollView>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0.05"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/next" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,6 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:padding="8dp"
                     android:maxLines="1"
                     android:text="Title"
                     android:textColor="#363333"
@@ -86,6 +106,7 @@
                     android:layout_marginTop="3dp"
                     android:ellipsize="end"
                     android:maxLines="2"
+                    android:padding="8dp"
                     android:text="Sub Title"
                     android:textColor="#272727"
                     android:textSize="19sp" />
@@ -95,7 +116,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:background="#F3EFEF"
                     android:ellipsize="end"
+                    android:padding="8dp"
+                    android:visibility="gone"
                     android:maxLines="2"
                     android:text="Rs 10000.00/-"
                     android:textColor="#000000"
@@ -107,6 +131,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:paddingRight="25dp"
+                    android:background="#F3EFEF"
+                    android:padding="8dp"
                     android:text="Real deal of the product name n sub product name is amazing witha all details under strored."
                     android:textColor="#5E5D5D"
                     android:textSize="18sp" />
@@ -121,7 +147,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="45dp"
                 android:background="@color/orange"
-                android:text="Add to cart"
+                android:text="Enquiry / Contact"
                 android:textColor="@color/white"
                 android:textSize="17sp"
                 android:textStyle="bold" />
