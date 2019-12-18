@@ -163,8 +163,8 @@ public class CategoryDetailsFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
             //add imageview
+
             thumbnailsContainer.addView(imageLayout);
         }
     }
