@@ -10,9 +10,9 @@ import java.util.List;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private List<Integer> images;
+    private List<String> images;
 
-    public ViewPagerAdapter(FragmentManager fm, List<Integer> imagesList) {
+    public ViewPagerAdapter(FragmentManager fm, List<String> imagesList) {
         super(fm);
         this.images = imagesList;
     }
