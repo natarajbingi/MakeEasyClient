@@ -18,7 +18,7 @@ public interface Api {
     //make sure you are not using localhost
     //find the ip usinc ipconfig command
 //    String BASE_URL = "http://192.168.0.107:80/makein/";
-//    String BASE_URL = "http://192.168.0.107:80/makein/";
+//    String BASE_URL = "http://192.168.0.105:80/makein/";
     String BASE_URL = "http://snsproduction.com/makeasy/";
 
 
@@ -96,6 +96,34 @@ public interface Api {
     );
 
     @Multipart
+    @POST("apis.php?apicall=userprodreq")
+    Call<MyResponse> userprodreq(@Part("user_id") RequestBody user_id,
+                                   @Part("prod_id") RequestBody prod_id,
+                                   @Part("prod_subid") RequestBody prod_subid,
+                                   @Part("quantity") RequestBody quantity,
+                                   @Part("sell_cost") RequestBody sell_cost,
+                                   @Part("delivery_address") RequestBody delivery_address,
+                                   @Part("userContactNo") RequestBody userContactNo,
+                                   @Part("userQuery") RequestBody userQuery,
+                                   @Part("userCompanyName") RequestBody userCompanyName,
+                                   @Part("userCompanyAddress") RequestBody userCompanyAddress,
+                                   @Part("userCompnyEmailAddress") RequestBody userCompnyEmailAddress,
+                                   @Part("comment") RequestBody comment
+    );
+
+    @Multipart
+    @POST("apis.php?apicall=getAllProdReqs")
+    Call<MyResponse> getAllProdReqs(@Part("user_id") RequestBody user_id,
+                                    @Part("deli_status") RequestBody deli_status
+    );
+
+    @Multipart
+    @POST("apis.php?apicall=userprodreqdelete")
+    Call<MyResponse> userprodreqdelete(@Part("id") RequestBody id,
+                                    @Part("createdby") RequestBody createdby
+    );
+
+    @Multipart
     @POST("apis.php?apicall=getallprodsubs")
     Call<MyResponse> getallprodsubs(@Part("created_by") RequestBody created_by);
 
@@ -106,7 +134,7 @@ public interface Api {
                          @Part("registrationID") RequestBody registrationID,
                          @Part("imeiNumber") RequestBody imeiNumber,
                          @Part("deviceName") RequestBody deviceName,
-                         @Part("appVersion") RequestBody appVersion
+                                 @Part("appVersion") RequestBody appVersion
     );
 
 //    public String registrationID;

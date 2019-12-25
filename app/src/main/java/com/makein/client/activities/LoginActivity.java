@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     String userIdStr, passwordStr;
     private ProgressDialog dialog;
     boolean keepMeSignedStr;
-    String deviceName =  android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL;
+    String deviceName = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL;
     String imeiNumber = UUID.randomUUID().toString();
     String appVersion = Controller.appVersion;
     String registrationID = "";
@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         context = this;
         dialog = new ProgressDialog(LoginActivity.this);
         dialog.setMessage("in Progress,  please wait.");
+        registrationID = Sessions.getUserObject(getApplicationContext(), Controller.token);
 
         String LogInDirect = Sessions.getUserObject(context, Controller.keepMeSignedStr);
         if (LogInDirect != null) {
@@ -123,19 +124,20 @@ public class LoginActivity extends AppCompatActivity {
 //            startActivity(intent);
 
 
-
     public void login() {
-        if (!Validation()) {
-            Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-            login.setEnabled(true);
-            return;
+        if (registrationID != null && !registrationID.isEmpty()) {
+            if (!Validation()) {
+                Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+                login.setEnabled(true);
+                return;
+            } else {
+                keepMeSignedStr = remember.isChecked();
+                Login(userIdStr, passwordStr);
+            }
+            login.setEnabled(false);
         } else {
-            keepMeSignedStr = remember.isChecked();
-            Login(userIdStr, passwordStr);
-
+            Controller.Toasty(context, "Network problem, Please restart the app.");
         }
-
-        login.setEnabled(false);
     }
 
     private void Login(String username, String pwd) {
@@ -153,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
         //creating our api
         Api api = RetroCall.getClient();
         //creating a call and calling the upload image method
-        Call<LoginRes> call = api.login(usernameBody, pwdBody,registrationIDBody,imeiNumberBody,deviceNameBody,appVersionBody);
+        Call<LoginRes> call = api.login(usernameBody, pwdBody, registrationIDBody, imeiNumberBody, deviceNameBody, appVersionBody);
 
 
         //finally performing the call
@@ -163,24 +165,25 @@ public class LoginActivity extends AppCompatActivity {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
+                Log.d("LoginReg",registrationID);
                 login.setEnabled(true);
                 Controller.logPrint(call.request().toString(), null, response.body());
                 assert response.body() != null;
                 if (!response.body().error) {
 //                    if (!response.body().data.get(0).createdby.equals("ADMIN")) {
-                        Sessions.setUserObject(context, response.body().data.get(0).id + "", Controller.userID);
-                        Sessions.setUserObject(context, response.body().data.get(0).email_id + "", Controller.emailID);
-                        Sessions.setUserObject(context, response.body().data.get(0).profile_img + "", Controller.profile_img);
-                        Sessions.setUserObject(context, response.body().data.get(0).first_name + " " + response.body().data.get(0).last_name + "", Controller.name);
-                        Sessions.setUserObject(context, response.body().data.get(0).address_one + ", " + response.body().data.get(0).address_two + ", " + response.body().data.get(0).Landmark + "" + response.body().data.get(0).pincode, Controller.Address);
-                        Sessions.setUserObj(context, response.body(), Controller.LoginRes);
+                    Sessions.setUserObject(context, response.body().data.get(0).id + "", Controller.userID);
+                    Sessions.setUserObject(context, response.body().data.get(0).email_id + "", Controller.emailID);
+                    Sessions.setUserObject(context, response.body().data.get(0).profile_img + "", Controller.profile_img);
+                    Sessions.setUserObject(context, response.body().data.get(0).first_name + " " + response.body().data.get(0).last_name + "", Controller.name);
+                    Sessions.setUserObject(context, response.body().data.get(0).address_one + ", " + response.body().data.get(0).address_two + ", " + response.body().data.get(0).Landmark + "" + response.body().data.get(0).pincode, Controller.Address);
+                    Sessions.setUserObj(context, response.body(), Controller.LoginRes);
 
-                        LoginSuccess();
-                        if (keepMeSignedStr) {
-                            Sessions.setUserObject(context, "TRUE", Controller.keepMeSignedStr);
-                        } else {
-                            Sessions.setUserObject(context, "FALSE", Controller.keepMeSignedStr);
-                        }
+                    LoginSuccess();
+                    if (keepMeSignedStr) {
+                        Sessions.setUserObject(context, "TRUE", Controller.keepMeSignedStr);
+                    } else {
+                        Sessions.setUserObject(context, "FALSE", Controller.keepMeSignedStr);
+                    }
 //                    } else {
 //                        Controller.Toasty(context, "Credentials are wrong, Please try again.");
 //                    }
@@ -200,6 +203,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     void LoginSuccess() {
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);

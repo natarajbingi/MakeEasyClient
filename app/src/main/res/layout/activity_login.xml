@@ -48,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Email ID"
                         android:inputType="text"
-                        android:text="admin@gmail.com"
+                        android:text="ale@gmail.com"
                         android:textColor="@color/colorAccent" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Password"
                         android:inputType="textPassword"
-                        android:text="123456"
+                        android:text="demo123"
                         android:textColor="@color/colorAccent" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -76,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Remember me"
+                android:checked="true"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold" />
 

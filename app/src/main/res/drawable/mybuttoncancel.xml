@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item android:state_pressed="true" >
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <stroke android:width="1dip" android:color="#01acf1" />
+            <gradient android:angle="-90" android:startColor="#01acf1" android:endColor="#01acf1"  />
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <stroke android:width="1dip" android:color="#01acf1" />
+            <solid android:color="#0777a4"/>
+        </shape>
+    </item>
+    <item >
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <stroke android:width="1dip" android:color="#01acf1" />
+            <gradient android:angle="-90" android:startColor="#01acf1" android:endColor="#01acf1" />
+        </shape>
+    </item>-->
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="3dip" />
+            <stroke android:width="1dip" android:color="#95a7ae" />
+            <gradient android:angle="-90" android:endColor="#95a7ae" android:startColor="#95a7ae" />
+        </shape>
+    </item>
+    <item android:state_enabled="true" android:state_focused="true" android:state_window_focused="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="3dip" />
+            <stroke android:width="1dip" android:color="#95a7ae" />
+            <solid android:color="#95a7ae" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="3dip" />
+            <stroke android:width="1dip" android:color="#95a7ae" />
+            <gradient android:angle="-90" android:endColor="#95a7ae" android:startColor="#95a7ae" />
+        </shape>
+    </item>
+</selector>
