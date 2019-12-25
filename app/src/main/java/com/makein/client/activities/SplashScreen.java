@@ -15,6 +15,7 @@ import android.util.Log;
 
 import com.makein.client.R;
 import com.makein.client.controller.Controller;
+import com.makein.client.controller.Sessions;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -40,6 +41,8 @@ public class SplashScreen extends AppCompatActivity {
             enter();
         }
 
+        String str = Sessions.getUserObject(getApplicationContext(), Controller.token);
+        Log.d("token", str);
     }
 
 
