@@ -42,7 +42,7 @@ public class SplashScreen extends AppCompatActivity {
         }
 
         String str = Sessions.getUserObject(getApplicationContext(), Controller.token);
-        Log.d("token", str);
+        Log.d("token", str+"");
     }
 
 

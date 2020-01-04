@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MakeInAppClient</string>
+    <string name="app_name">MakeEasy</string>
 
     <string name="logout_confirm">Are you sure you want to Logout?</string>
     <string name="yes">YES</string>
