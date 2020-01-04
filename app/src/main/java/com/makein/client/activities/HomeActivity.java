@@ -59,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_home_black_24dp));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.profile));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.settings));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.settings));
 //        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_shopping_cart));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 

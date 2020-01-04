@@ -2,6 +2,7 @@ package com.makein.client.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -237,9 +238,10 @@ public class CategoryDetailsFragment extends Fragment {
                 Controller.logPrint(call.request().toString(), null, response.body());
                 assert response.body() != null;
                 if (!response.body().error) {
-
+                    Controller.alertDialogShow(context, response.body().message);
                 } else {
-                    Controller.Toasty(context, "Something went wrong server side...");
+                    Controller.alertDialogShow(context, "Something went wrong, Please try again.");
+                    // Controller.Toasty(context, "Something went wrong server side...");
                 }
             }
 
@@ -288,8 +290,8 @@ public class CategoryDetailsFragment extends Fragment {
                 if (userQueryStr.isEmpty() || userCompanyNameStr.isEmpty() || userContactNoStr.isEmpty()) {
                     Controller.Toasty(context, "please fill the Mandatory fields.");
                 } else {
-                    somethingCollect(userQueryStr, userCompanyNameStr, userCompanyAddressStr, userCompnyEmailAddressStr, userContactNoStr);
                     popupWindow.dismiss();
+                    somethingCollect(userQueryStr, userCompanyNameStr, userCompanyAddressStr, userCompnyEmailAddressStr, userContactNoStr);
                 }
             }
         });
