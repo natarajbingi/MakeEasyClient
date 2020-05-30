@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity implements TabLayout.OnTabSe
         setContentView(R.layout.activity_home);
         context = getApplicationContext();
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("HOME");
+        toolbar.setTitle("HOME Screen");
         toolbar.setNavigationIcon(R.drawable.ic_home_black_24dp);
         setSupportActionBar(toolbar);
 

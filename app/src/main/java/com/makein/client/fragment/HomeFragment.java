@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.RecyclerViewCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.home_fragment, container, false);
         toolbar = v.findViewById(R.id.toolbar_home);
-        toolbar.setTitle("Home");
+        toolbar.setTitle("Home fragment");
         toolbar.setTitleTextColor(Color.WHITE);
         context = getContext();
         home = v.findViewById(R.id.home_layout_);
